@@ -1,0 +1,26 @@
+<div *ngIf="!loadingCountry && countryCode">
+  <h2><img class="flag" src="{{countryDetails.flag}}" /> {{countryDetails.name}}</h2>
+  <div><span>Code: </span>{{countryDetails.alpha3Code}}</div>
+  <div><span>Capital: </span>{{countryDetails.capital}}</div>
+  <div><span>Population: </span>{{countryDetails.population}}</div>
+  <div><span>Region: </span>{{countryDetails.region}}</div>
+  <div><span>Subregion: </span>{{countryDetails.subregion}}</div>
+  <div>
+    <span>Timezones: </span><span *ngIf="!countryDetails.timezones.length">none reported</span>
+    <ul *ngIf="countryDetails.timezones.length">
+      <li *ngFor="let timezone of countryDetails.timezones">{{timezone}}</li>
+    </ul>
+  </div>
+  <div>
+    <span>Borders: </span><span *ngIf="!borders.length && !loadingBorders">none reported</span><span *ngIf="!borders.length && loadingBorders">loading borders..</span>
+    <ul *ngIf="borders.length">
+      <li *ngFor="let border of borders"><img class="flag" src="{{border.flag}}" /> {{border.name}}</li>
+    </ul>
+  </div>
+</div>
+<div *ngIf="!loadingCountry && !countryCode" class="vertical-align-middle">
+  <span>Please select a country, to see more details.</span>
+</div>
+<div *ngIf="loadingCountry" class="vertical-align-middle">
+  <span>loading..</span>
+</div>

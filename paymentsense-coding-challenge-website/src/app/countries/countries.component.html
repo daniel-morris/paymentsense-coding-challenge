@@ -1,0 +1,22 @@
+<section class="countries half-width">
+  <h2>Countries</h2>
+  <span *ngIf="!countries">{{userMessage}}</span>
+  <ul class="countries-list" *ngIf="countries">
+    <li *ngFor="let country of paginatedCountries">
+      <div class="selectable" (click)="selectCountry(country)">
+        <img class="flag" src="{{country.flag}}" /> <span [className]="country.alpha3Code === selectedCountryCode ? 'name selected' : 'name'">{{country.name}}</span>
+      </div>
+    </li>
+  </ul>
+
+  <ul class="pagination" *ngIf="countries && totalItems > pageSize">
+    <li class="page-item"><span class="page-link" (click)="page=1"><<</span></li>
+    <li class="page-item"><span class="page-link" (click)="previous()"><</span></li>
+    <li [className]="page==i?'page-item selected':'page-item'" *ngFor="let i of pages"><span class="page-link" (click)="page=i">{{i}}</span></li>
+    <li class="page-item"><span class="page-link" (click)="next()">></span></li>
+    <li class="page-item"><span class="page-link" (click)="page=numPages">>></span></li>
+  </ul>  
+</section>
+<section class="country-detail half-width">
+  <app-country-detail [countryCode]="selectedCountryCode"></app-country-detail>
+</section>
